@@ -16,7 +16,7 @@ interface ChatResponse {
 export async function sendChatRequest({ persona, messages }: ChatRequestPayload): Promise<ChatResponse> {
   const apiUrl = import.meta.env.DEV 
     ? "http://localhost:3001/api/chat"
-    : "/api/chat";
+    : "https://persona-based-ai-chatbot-backend.vercel.app/api/chat";
   
   const response = await fetch(apiUrl, {
     method: "POST",
