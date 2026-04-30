@@ -2,7 +2,8 @@
   "buildCommand": "npm install --prefix backend && npm install --prefix frontend && npm run build --prefix frontend",
   "outputDirectory": "frontend/dist",
   "env": {
-    "NODE_ENV": "production"
+    "NODE_ENV": "production",
+    "VITE_API_URL": "/api/chat"
   },
   "rewrites": [
     {
