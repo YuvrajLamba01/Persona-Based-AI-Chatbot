@@ -40,9 +40,19 @@ app.use(cors({
   origin: allowedOrigins,
   methods: ["GET", "POST", "OPTIONS"],
   allowedHeaders: ["Content-Type"],
-  credentials: true
+  credentials: true,
+  optionsSuccessStatus: 200
 }));
 app.use(express.json({ limit: "1mb" }));
+
+// Explicit OPTIONS handler for preflight requests
+app.options("*", cors({
+  origin: allowedOrigins,
+  methods: ["GET", "POST", "OPTIONS"],
+  allowedHeaders: ["Content-Type"],
+  credentials: true,
+  optionsSuccessStatus: 200
+}));
 
 // Health Check Endpoint
 app.get("/api/health", (req, res) => {
