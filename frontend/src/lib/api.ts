@@ -14,8 +14,10 @@ interface ChatResponse {
 }
 
 export async function sendChatRequest({ persona, messages }: ChatRequestPayload): Promise<ChatResponse> {
-  // Use environment variable or fallback to relative path (works in both dev and Vercel)
-  const apiUrl = import.meta.env.VITE_API_URL || "/api/chat";
+  const apiUrl = import.meta.env.DEV 
+    ? "http://localhost:3001/api/chat"
+    : "https://persona-based-ai-chatbot-backend.vercel.app/api/chat";
+  
   const response = await fetch(apiUrl, {
     method: "POST",
     headers: {

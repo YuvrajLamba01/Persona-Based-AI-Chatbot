@@ -1,8 +1,5 @@
 {
   "buildCommand": "cd frontend && npm install && npm run build",
-  "outputDirectory": "frontend/dist",
-  "env": {
-    "NODE_ENV": "production",
-    "VITE_API_URL": "https://persona-based-ai-chatbot-backend.vercel.app/api/chat"
-  }
+  "outputDirectory": "frontend/dist"
 }
+
