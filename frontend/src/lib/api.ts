@@ -14,7 +14,7 @@ interface ChatResponse {
 }
 
 export async function sendChatRequest({ persona, messages }: ChatRequestPayload): Promise<ChatResponse> {
-  const response = await fetch("https://persona-based-ai-chatbot-backend-1w.vercel.app/api/chat", {
+  const response = await fetch("https://persona-based-ai-chatbot-backend.vercel.app/api/chat", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

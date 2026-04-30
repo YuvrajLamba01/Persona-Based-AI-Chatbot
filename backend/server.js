@@ -20,8 +20,8 @@ const app = express();
 const port = Number(process.env.PORT || 3001);
 
 const allowedOrigins = process.env.CLIENT_ORIGIN
-  ? [process.env.CLIENT_ORIGIN]
-  : ["http://localhost:5173"];
+  ? process.env.CLIENT_ORIGIN.split(",")
+  : ["http://localhost:5173", "https://persona-based-ai-chatbot-frontend.vercel.app"];
 
 const isDemoMode = String(process.env.DEMO_MODE).toLowerCase() === "true";
 
@@ -130,8 +130,13 @@ if (fs.existsSync(frontendDistPath)) {
   console.warn(`[WARN] Frontend dist folder not found at: ${frontendDistPath}`);
 }
 
-// Start Server
-app.listen(port, () => {
-  console.log(`Server running at http://localhost:${port}`);
-  console.log(`Demo Mode: ${isDemoMode ? "ENABLED" : "DISABLED"}`);
-});
+// Start Server (for local development)
+if (process.env.NODE_ENV !== "production") {
+  app.listen(port, () => {
+    console.log(`Server running at http://localhost:${port}`);
+    console.log(`Demo Mode: ${isDemoMode ? "ENABLED" : "DISABLED"}`);
+  });
+}
+
+// Export for Vercel serverless
+export default app;
