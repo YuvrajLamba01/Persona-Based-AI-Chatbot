@@ -21,7 +21,8 @@ The application showcases:
 
 ## 🌐 Live Demo
 
-> **Deployed URL:** [Add your live deployment link here after launching]
+> **Deployed Frontend:** https://persona-based-ai-chatbot-frontend.vercel.app/
+> **Deployed Backend:** https://persona-based-ai-chatbot-backend.vercel.app/
 
 ---
 
