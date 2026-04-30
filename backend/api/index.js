@@ -9,9 +9,10 @@ dotenv.config();
 
 const app = express();
 
-const allowedOrigins = process.env.CLIENT_ORIGIN
-  ? process.env.CLIENT_ORIGIN.split(",")
-  : ["http://localhost:5173", "https://persona-based-ai-chatbot-frontend.vercel.app"];
+const allowedOrigins = [
+  "http://localhost:5173",
+  "https://persona-based-ai-chatbot-frontend.vercel.app"
+];
 
 const isDemoMode = String(process.env.DEMO_MODE).toLowerCase() === "true";
 
@@ -23,14 +24,21 @@ const createClient = () => {
   });
 };
 
-// CORS middleware
-app.use(cors({
-  origin: allowedOrigins,
-  methods: ["GET", "POST", "OPTIONS"],
-  allowedHeaders: ["Content-Type"],
-  credentials: true,
-  optionsSuccessStatus: 200
-}));
+// Manual CORS headers middleware
+app.use((req, res, next) => {
+  const origin = req.headers.origin;
+  if (allowedOrigins.includes(origin)) {
+    res.header("Access-Control-Allow-Origin", origin);
+    res.header("Access-Control-Allow-Methods", "GET, POST, OPTIONS, PUT, DELETE");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+    res.header("Access-Control-Allow-Credentials", "true");
+  }
+  
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+  next();
+});
 
 app.use(express.json({ limit: "1mb" }));
 
